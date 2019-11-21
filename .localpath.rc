@@ -1,0 +1,11 @@
+#! /bin/sh
+
+IFS=":"
+
+for i in "bin" "sbin"; do
+	local_path="$HOME/.local/$i"
+
+	if [ -d "$local_path" ]; then
+		export PATH="$PATH:$_local_path"
+	fi
+done
