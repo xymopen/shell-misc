@@ -1,0 +1,13 @@
+#! /bin/sh
+
+# https://askubuntu.com/questions/439410/how-to-make-man-work-for-shell-builtin-commands-and-keywords
+man () {
+	case "$(type -t -- ""$1"")" in
+	keyword|builtin)
+		help -m "$1" | sensible-pager
+	;;
+	*)
+		command man "$@"
+	;;
+	esac
+}
