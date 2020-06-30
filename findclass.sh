@@ -35,7 +35,7 @@ EOF
 			elif [ -f "$path" ]; then
 				case "$path" in
 					*.jar|*.zip)
-						if unzip -lqq "$path" | awk -v "clzfile=$clzfile" -e "$AWK_PROG" -; then
+						if unzip -lqq "$path" | awk -v "clzfile=$clzfile" "$AWK_PROG" -; then
 							echo "$path"
 
 							return
