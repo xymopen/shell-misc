@@ -1,7 +1,7 @@
 #! /bin/sh
 
 if [ $# -eq 0 -o "$1" = '-h' -o "$1" = '--help' ]; then
-	cat - 1>& 2 <<- EOF
+	cat - 1>& 2 <<- "EOF"
 		Usage: frompath [ VALUE ] [ DELIM ]
 
 		Split VALUE by DELIM
