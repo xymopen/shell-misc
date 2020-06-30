@@ -10,18 +10,18 @@ findclass() {
 EOF
 	else
 		# For Bash just use "${1//.//}.class"
-		local SED_PROG='
+		local SED_PROG_RENAME_CLASSFILE='
 			s/\./\//g;
 			s/$/\.class/;
 		'
 
-		local AWK_PROG='
+		local AWK_PROG_FIND_CLASSFILE='
 			BEGIN { retv = 1; }
 			$4 == clzfile { retv = 0; }
 			END { exit retv; }
 		'
 
-		local clzfile="$(echo -n "$1" | sed -e "$SED_PROG" -)"
+		local clzfile="$(echo -n "$1" | sed -e "$SED_PROG_RENAME_CLASSFILE" -)"
 
 		local IFS=":"
 
@@ -35,7 +35,7 @@ EOF
 			elif [ -f "$path" ]; then
 				case "$path" in
 					*.jar|*.zip)
-						if unzip -lqq "$path" | awk -v "clzfile=$clzfile" "$AWK_PROG" -; then
+						if unzip -lqq "$path" | awk -v "clzfile=$clzfile" "$AWK_PROG_FIND_CLASSFILE" -; then
 							echo "$path"
 
 							return
